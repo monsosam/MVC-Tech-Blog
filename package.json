@@ -1,1 +1,19 @@
-{}
+{
+  "name": "project-14",
+  "description": "**Model-View-Controller (MVC) Challenge: Tech Blog**",
+  "version": "1.0.0",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \\\"Error: no test specified\\\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/monsosam/Project-14.git"
+  },
+  "author": "Samuel Monson",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/monsosam/Project-14/issues"
+  },
+  "homepage": "https://github.com/monsosam/Project-14#readme"
+}
