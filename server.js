@@ -1,8 +1,10 @@
 const express = require('express');
 const exphbs = require('express-handlebars');
 const session = require('express-session');
+const routes = require('./controllers');
+const sequelize = require('./config/connection');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
-const db = require('./models');  // Sequelize models
+
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -12,25 +14,25 @@ app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
 app.set('view engine', 'handlebars');
 
 // Middleware
-app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 
 // Express session setup
 app.use(session({
-  secret: process.env.SESSION_SECRET,
+  secret: 'super secret string',
+  cookie: { maxAge: 1800000 }, // Session expires after 30 minutes of inactivity
   resave: false,
   saveUninitialized: true,
-  store: new SequelizeStore({ db }),
+  store: new SequelizeStore({
+    db: sequelize
+  }),
 }));
 
 // Routes
-require('./routes/apiRoutes')(app);
-require('./routes/htmlRoutes')(app);
+app.use(routes);
 
 // Start the server
-db.sequelize.sync().then(() => {
-  app.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`);
-  });
+sequelize.sync({ force: false }).then(() => {
+  app.listen(PORT, () => console.log(`Now listening on PORT ${PORT}`));
 });
