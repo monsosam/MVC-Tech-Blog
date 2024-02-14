@@ -29,8 +29,8 @@ const editFormHandler = async (event) => {
       alert('Failed to update your post');
     }
     document.location.replace('/dashboard');
-  };
+};
 
-  document
+document
   .querySelector('#edit-post-form')
   .addEventListener('submit', editFormHandler);
