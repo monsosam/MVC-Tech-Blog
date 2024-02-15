@@ -7,10 +7,10 @@ const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 
 // Handlebars setup
-app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
+app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
 
 // Middleware
