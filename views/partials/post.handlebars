@@ -1,14 +1,33 @@
-<div class="card">
-  <div class="card-header  flex-row justify-space-between">
-    <h2>
-      <a href="/post/{{id}}">
-        <div class="col-8">{{postTitle}}</div>
-      </a>
-    </h2>
-    <div class="col-3">posted by {{user.username}} on {{format_date dateCreated}}
+<div class="center">
+  <!-- Simplified Blog Post Creation Section -->
+  <div id="createPost">
+    <!-- Card Header using post-header class for styling -->
+    <div class="post-header">
+      <h4>Create New Post</h4>
     </div>
-  </div>  
-  <p class="card-body">
-   {{postContent}}
-  </p>
+    <!-- Card Body for Form, applying form styling directly -->
+    <div class="card-body">
+      <!-- Blog Creation Form -->
+      <form id="createBlog" class="form">
+        <!-- Input for Post Title -->
+        <div>
+          <label for="title">Title</label>
+          <input type="text" name="title">
+        </div>
+        <!-- Textarea for Post Content -->
+        <div>
+          <label for="content">Content</label>
+          <textarea name="content"></textarea>
+        </div>
+        <!-- Submit Button for Form -->
+        <button type="submit" class="btn-generic">Create</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Button to Trigger New Post Creation -->
+  <button id="GrabPost" type="button" class="btn-add">+ New Post</button>
 </div>
+
+<!-- Link to JavaScript file for handling post creation -->
+<script src="./../../public/js/createPost.js"></script>

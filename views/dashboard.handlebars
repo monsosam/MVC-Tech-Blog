@@ -1,33 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
+<!-- Loop through each blog in the 'blogs' array -->
+{{#each blogs}}
+<div>
+    <!-- Link to edit the specific blog post -->
+    <a href="/editblog/{{id}}" class="post-link">
+        <!-- Card Header with Blog Title -->
+        <div class="post-header">
+            <h4>{{title}}</h4>
+        </div>
+        <!-- Card Body with Blog Content -->
+        <div class="post-content">
+            <h5>{{content}}</h5>
+        </div>
+    </a>
+</div>
+{{/each}}
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tech Blog | Dashboard</title>
-  <link rel="stylesheet" href="/css/style.css">
-</head>
+<!-- Button to Add a New Post -->
+<button id="grabPost" type="button" class="btn-add">Add New Post</button>
 
-<body class="flex-column min-100-vh">
-  <nav class="navbar">
-    <ul class="flex-row">
-      <li class="li-inline nav-item"><a href="/">Home</a></li>
-      <li class="li-inline nav-item"><a href="/dashboard">Dashboard</a></li>
-      <li class="li-inline nav-item"><a href="#" id="logout-link">Logout</a></li>
-    </ul>
-  </nav>
-  <header class="hero">
-    <h1 class="app-title"><a href="/dashboard">Your Dashboard</a></h1>
-  </header>
-
-  <main class="col-auto">
-    {{{body}}}
-  </main>
-
-  <footer class="footer flex-row justify-center">
-    <a href="/dashboard/new">➕ New Post</a>
-  </footer>
-</body>
-
-</html>
-<script src="/js/logout.js"></script>
+<!-- Link to JavaScript file for handling blog post interactions -->
+<script src="/js/grabBlog.js"></script>

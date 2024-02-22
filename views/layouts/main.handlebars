@@ -2,39 +2,49 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" type="text/css" href="/css/style.css">
-  <title>Tech Blog | Home</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tech Blog</title>
+    <!-- Link to your CSS file -->
+    <link href="/path/to/your/style.css" rel="stylesheet">
 </head>
 
-<body class="flex-column min-100-vh">
-  <nav class="navbar">
-    <ul>
-      <li class="li-inline nav-item"><a href="/">Home</a></li>
-      <li class="li-inline nav-item"><a href="/dashboard">Dashboard</a></li>
-      <!-- Conditionally render login link with UNLESS-->
-      {{#unless loggedIn}}
-      <li class="li-inline nav-item"><a href="/login">Login</a></li>
-      {{/unless}}
-      <li class="li-inline nav-item"><a href="#" id="logout-link">Logout</a></li>
-    </ul>
-  </nav>
+<body class="bg-info">
+    <!-- Simplified Navigation Bar -->
+    <nav class="post-header">
+        <div>
+            <!-- Home link -->
+            <a class="btn-nav" aria-current="page" href="/">Home</a>
 
-  <header class="hero">
-    <h1 class="app-title"><a href="/">The Tech Blog</a></h1>
-  </header>
+            <!-- Dashboard link, visible only if logged in -->
+            {{#if logged_in}}
+            <a class="btn-nav" aria-current="page" href="/dashboard">Dashboard</a>
+            {{/if}}
 
-  <main class="col-auto">
-    {{{body}}}
-  </main>
+            <!-- Conditional Login/Logout link based on login status -->
+            {{#if logged_in}}
+            <a class="btn-nav" href="/logout" id="logout">Log out</a>
+            {{else}}
+            <a class="btn-nav" href="/login">Log in</a>
+            {{/if}}
+        </div>
+    </nav>
 
-  <footer class="flex-row justify-center">
-    &copy; Tech bloggers
-  </footer>
+    <!-- Header Text Box -->
+    <div class="center">
+        <h1>Tech Blog</h1>
+    </div>
+
+    <!-- Main content area -->
+    <main class="center">
+        {{{ body }}}
+    </main>
+
+    <!-- Logout script, included only if logged in -->
+    {{#if logged_in}}
+    <script src="../public/js/logout.js"></script>
+    {{/if}}
 </body>
 
 </html>
-{{#if loggedIn}}
-<script src="/js/logout.js"></script>
-{{/if}}

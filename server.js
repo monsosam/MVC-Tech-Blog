@@ -1,7 +1,10 @@
+const path = require('path');
 const express = require('express');
+
 const exphbs = require('express-handlebars');
 const session = require('express-session');
 const routes = require('./controllers');
+const helpers = require('./utils/helpers');
 const sequelize = require('./config/connection');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
@@ -14,6 +17,7 @@ const hbs = exphbs.create({});
 // Handlebars setup
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
+app.set('views', './views');
 
 // Middleware
 app.use(express.json());
@@ -23,7 +27,12 @@ app.use(express.static('public'));
 // Express session setup
 app.use(session({
   secret: 'super secret string',
-  cookie: { maxAge: 1800000 }, // Session expires after 30 minutes of inactivity
+  cookie: { 
+    maxAge: 1800000,  // Session expires after 30 minutes of inactivity
+    httpOnly: true,
+    secure: false,
+    sameSite: 'strict',
+   }, 
   resave: false,
   saveUninitialized: true,
   store: new SequelizeStore({

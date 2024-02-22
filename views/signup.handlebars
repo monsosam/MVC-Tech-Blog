@@ -1,26 +1,41 @@
-<div class="card">
+<!DOCTYPE html>
+<html lang="en">
 
-  <h2 class="card-header">SIGN UP</h2>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up</title>
+  <!-- Ensure your style.css link is here if needed -->
+</head>
 
-  <form class="card-body signup-form">
+<body>
+  <div id="signupPage" class="center">
+    <h2>Sign Up</h2>
+    <!-- Ensure form ID matches what signup.js expects -->
+    <form id="signup-form" class="form">
+      <!-- Ensure input IDs match what signup.js expects -->
+      <div class="mb-3">
+        <label for="name">Name</label>
+        <input type="text" id="name-signup" name="name" />
+      </div>
+      <div class="mb-3">
+        <label for="email">Email</label>
+        <input type="email" id="email-signup" name="email" />
+      </div>
+      <div class="mb-3">
+        <label for="password">Password</label>
+        <input type="password" id="password-signup" name="password" />
+      </div>
+      <div class="mb-3">
+        <label for="confirmPassword">Confirm Password</label>
+        <input type="password" id="confirmPassword-signup" name="confirmPassword" />
+      </div>
+      <button type="submit" class="btn-generic">Sign Up</button>
+    </form>
+  </div>
 
-    <div class="form-group">
-      <label class="form-label">Username:</label>
-      <input class="form-input" type="text" id="username-input-signup" />
-    </div>
+  <!-- Include the signup.js script to enable functionality -->
+  <script src="../public/js/signup.js"></script>
+</body>
 
-    <div class="form-group">
-      <label class="form-label">Password:</label>
-      <input class="form-input" type="password" id="password-input-signup" />
-    </div>
-
-    <div class="form-group">
-      <button class="btn btn-primary" type="submit">SIGN UP</button>
-    </div>
-
-  </form>
-      <br>
-    <a href="/login">Login Instead</a>
-
-</div>
-<script src="/js/signup.js"></script>
+</html>

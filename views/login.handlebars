@@ -1,25 +1,33 @@
-<div class="card">
-
-  <h2 class="card-header">LOGIN</h2>
-
-  <form class="card-body login-form">
-
-    <div class="form-group">
-      <label class="form-label">Username:</label>
-      <input class="form-input" type="text" id="username-input-login" />
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <!-- Ensure your style.css link is here if needed -->
+</head>
+<body>
+    <!-- Your existing content, adjusted to include the IDs required by login.js -->
+    <div id="loginPage" class="center">
+        <div>
+            <h2>Log In</h2>
+            <!-- Adjusted form ID to match login.js expectation -->
+            <form id="login-form" class="form">
+                <!-- Adjusted input IDs to match login.js expectation -->
+                <div class="mb-3">
+                    <label for="username">Username</label>
+                    <input type="text" id="username-login" class="form-control" name="username" />
+                </div>
+                <div class="mb-3">
+                    <label for="password">Password</label>
+                    <input type="password" id="password-login" class="form-control" name="password" />
+                </div>
+                <button type="submit" class="btn-generic">Log In</button>
+            </form>
+        </div>
     </div>
 
-    <div class="form-group">
-      <label class="form-label">Password:</label>
-      <input class="form-input" type="password" id="password-input-login" />
-    </div>
-
-    <div class="form-group">
-      <button class="btn btn-primary" type="submit">Login</button>
-    </div>
-
-  </form>
-  <br>
-  <a href="/signup">Sign Up Instead</a>
-</div>
-<script src="/js/login.js"></script>
+    <!-- Include the login.js script to enable functionality -->
+    <script src="../public/js/login.js"></script>
+</body>
+</html>
