@@ -1,23 +1,16 @@
-<style>
-.card h4 {
-  color: aliceblue;
-}
-</style>
-
-<!-- Loop through each blog post in the 'blogs' array -->
-{{#each blogs}}
-<div>
-    <!-- Clickable area linking to the blog post's detailed view -->
-    <a href="/blog/{{id}}">
-        <!-- Card header containing the blog title and author information -->
-        <div>
-            <h4>{{title}}</h4> <!-- Blog title -->
-            <h4>Posted by {{user.name}} on {{format_date date_created}}</h4> <!-- Author and date -->
-        </div>
-        <!-- Card body containing a snippet or summary of the blog content -->
-        <div>
-            <h5>{{content}}</h5> <!-- Blog content -->
-        </div>
-    </a>
+{{!-- Display all posts on the homepage --}}
+{{#each posts as |post|}}
+<div class="row mb-4 card border-dark">
+  <div class="col-md-12 d-flex justify-content-between align-items-center primary">
+    <h2>
+      <a class="text-color" href="/post/{{post.id}}">{{post.title}}</a>
+    </h2>
+    <p class="float-right">Posted by {{post.user.name}} on {{format_date post.date_created}}</p>
+  </div>
+  <div class="col-md-12">
+    <p>
+      {{post.content}}
+    </p>
+  </div>
 </div>
 {{/each}}
