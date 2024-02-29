@@ -1,33 +1,68 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <title>A Tech Blog</title>
-    <link rel="stylesheet" href="css/styles.css" />
+    <!-- Meta tags for responsiveness and character encoding -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tech Blog</title>
+
+    <!-- Bootstrap CSS for styling -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
 </head>
 
-<body class="secondary">
-    <header>
-        <div class="navbar navbar-expand-lg navbar-light bg-light mb-4">
-            <h1 class="mx-auto">A Tech Blog</h1>
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="/">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/profile">Dashboard</a>
-                </li>
-            </ul>
-            {{#if logged_in}}
-            <button class="btn btn-primary" id="logout">Logout</button>
-            {{else}}
-            <a class="btn btn-primary" href="/login">Login</a>
-            {{/if}}
-        </div>
-    </header>
-    <main class="container secondary">{{{ body }}}</main>
+<body class="bg-info">
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <!-- Navbar toggler for mobile view -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
+            <!-- Navbar items -->
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <!-- Home link -->
+                    <li class="nav-item">
+                        <a class="navbar-brand" aria-current="page" href="/">Home </a>
+                    </li>
+
+                    <!-- Dashboard link, visible only if logged in -->
+                    {{#if logged_in}}
+                    <li class="nav-item">
+                        <a class="nav-link mx-2" aria-current="page" href="/dashboard">Dashboard</a>
+                    </li>
+                    {{/if}}
+
+                    <!-- Conditional Login/Logout link based on login status -->
+                    <li class="nav-item">
+                        {{#if logged_in}}
+                        <a class="nav-link mx-2" href="/logout" id="logout">Log out</a>
+                        {{else}}
+                        <a class="nav-link mx-2" href="/login">Log in</a>
+                        {{/if}}
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header Text Box -->
+    <div
+        style="background-color: #dc3545; padding: 5px 10px; margin: 20px; border-radius: 10px; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5); display: inline-block;">
+        <h1 style="margin: 0; color: white;">Tech Blog</h1>
+    </div>
+
+    <!-- Main content area -->
+    <main class="container container-fluid mt-5">
+        {{{ body }}}
+    </main>
+
+    <!-- Logout script, included only if logged in -->
     {{#if logged_in}}
     <script src="/js/logout.js"></script>
     {{/if}}

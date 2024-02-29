@@ -1,60 +1,76 @@
 const loginFormHandler = async (event) => {
-    event.preventDefault();
-  
-    const username = document.querySelector('#username-login').value.trim();
-    const password = document.querySelector('#password-login').value.trim();
-  
-    if (username && password) {
-      try {
-        // Send a POST request to the API endpoint
-        const response = await fetch('/api/users/login', {
-            method: 'POST',
-            body: JSON.stringify({ username, password }),
-            headers: { 'Content-Type': 'application/json' },
-        });
-        if (response.ok) {
-            // If the login was successful, redirect to the profile page
-            document.location.replace('/profile');
-        } else {
-            alert('Login failed');
-        }
-    } catch (error) {
-        console.error('Login error:', error);
-        alert('An error occurred while logging in');
+  event.preventDefault();
+
+  const email = document.querySelector("#email-login").value.trim();
+  const password = document.querySelector("#password-login").value.trim();
+
+  if (email && password) {
+    const response = await fetch("/api/users/login", {
+      method: "POST",
+      body: JSON.stringify({ email, password }),
+      headers: { "Content-Type": "application/json" },
+    });
+
+    if (response.ok) {
+      window.location.href = "/";
+    } else {
+      alert("Failed to log in");
     }
-    }
+  }
 };
+
+document
+  .querySelector(".login-form")
+  .addEventListener("submit", loginFormHandler);
 
 const signupFormHandler = async (event) => {
-    event.preventDefault();
-  
-    const name = document.querySelector('#name-signup').value.trim();
-    const email = document.querySelector('#email-signup').value.trim();
-    const password = document.querySelector('#password-signup').value.trim();
-  
-    if (name && email && password) {
-      try {
-        const response = await fetch('/api/users', {
-            method: 'POST',
-            body: JSON.stringify({ name, email, password }),
-            headers: { 'Content-Type': 'application/json' },
-        });
-        if (response.ok) {
-            document.location.replace('/profile');
-        } else {
-            alert('Signup failed');
-        }
-    } catch (error) {
-        console.error('Signup error:', error);
-        alert('An error occurred while signing up');
+  event.preventDefault();
+
+  const name = document.querySelector("#name-signup").value.trim();
+  const email = document.querySelector("#email-signup").value.trim();
+  const password = document.querySelector("#password-signup").value.trim();
+  const confirmPassword = document
+    .querySelector("#confirmPassword-signup")
+    .value.trim();
+  let alertMessage = "";
+
+  if (!name) {
+    alertMessage += "Missing name\n";
+  }
+  if (!email) {
+    alertMessage += "Missing email\n";
+  }
+  if (!password) {
+    alertMessage += "Missing password\n";
+  }
+  if (password.length < 8) {
+    alertMessage += "Password is smaller than 8 characters\n";
+  }
+  if (!confirmPassword || password !== confirmPassword) {
+    alertMessage += "Passwords don't match\n";
+  }
+
+  if (alertMessage.length !== 0) {
+    alert(alertMessage);
+  } else if (name && email && password) {
+    const response = await fetch("/api/users", {
+      method: "POST",
+      body: JSON.stringify({ name, email, password }),
+      headers: { "Content-Type": "application/json" },
+    });
+
+    if (response.ok) {
+      window.location.href = "/";
+    } else {
+      alert("Failed to sign up");
     }
-    }
+  }
 };
 
 document
-    .querySelector('.login-form')   
-    .addEventListener('submit', loginFormHandler);
+  .querySelector(".signup-form")
+  .addEventListener("submit", signupFormHandler);
 
 document
-    .querySelector('.signup-form')
-    .addEventListener('submit', signupFormHandler);
+  .querySelector(".login-form")
+  .addEventListener("submit", loginFormHandler);

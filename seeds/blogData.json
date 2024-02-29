@@ -2,19 +2,16 @@
     {
         "title": "First Post",
         "content": "This is the content of the 1st post.",
-        "user_id": 1,
-        "date_created": "2024-02-20T08:00:00.000Z"
+        "user_id": 1
     },
     {
         "title": "Second Post",
         "content": "This is the content of the 2nd post.",
-        "user_id": 2,
-        "date_created": "2024-02-20T08:00:00.000Z"
+        "user_id": 2
     },
     {
         "title": "Third Post",
         "content": "This is the content of the 3rd post.",
-        "user_id": 1,
-        "date_created": "2024-02-20T08:00:00.000Z"
+        "user_id": 1
     }
 ]
