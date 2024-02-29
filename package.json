@@ -1,5 +1,5 @@
 {
-  "name": "project-14",
+  "name": "MVC-Tech-Blog",
   "description": "**Model-View-Controller (MVC) Challenge: Tech Blog**",
   "version": "1.0.0",
   "main": "app.js",
@@ -11,14 +11,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/monsosam/Project-14.git"
+    "url": "git+https://github.com/monsosam/MVC-Tech-Blog.git"
   },
   "author": "Samuel Monson",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/monsosam/Project-14/issues"
+    "url": "https://github.com/monsosam/MVC-Tech-Blog/issues"
   },
-  "homepage": "https://github.com/monsosam/Project-14#readme",
+  "homepage": "https://github.com/monsosam/MVC-Tech-Blog#readme",
   "dependencies": {
     "bcrypt": "^5.1.1",
     "connect-session-sequelize": "^7.1.7",
