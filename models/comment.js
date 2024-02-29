@@ -11,24 +11,24 @@ class Comment extends Model {}
       primaryKey: true,
       autoIncrement: true,
     },
-    commentContent: {
+    content: {
       type: DataTypes.STRING,
       allowNull: false,
       unique: true,
     },
-    dateCreated: {
+    date_created: {
       type: DataTypes.DATEONLY,
       allowNull: false,
       defaultValue: DataTypes.NOW,
     },
-    userId: {
+    user_id: {
       type: DataTypes.INTEGER,
       references: {
         model: 'user',
         key: 'id',
       },
     }, 
-    postId: {
+    post_id: {
       type: DataTypes.INTEGER,
       references: {
         model: 'post',
