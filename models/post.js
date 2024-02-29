@@ -11,20 +11,15 @@ class Post extends Model {}
       primaryKey: true,
       autoIncrement: true,
     },
-    title: {
+    post_title: {
       type: DataTypes.STRING(25),
       allowNull: false,
       unique: true,
     },
-    content: {
+    post_content: {
       type: DataTypes.STRING,
       allowNull: false,
       unique: true,
-    },
-    date_created: {
-      type: DataTypes.DATEONLY,
-      allowNull: false,
-      defaultValue: DataTypes.NOW,
     },
     user_id: {
       type: DataTypes.INTEGER,
@@ -32,7 +27,13 @@ class Post extends Model {}
         model: 'user',
         key: 'id',
       },
-    },  
+    },
+    date_created: {
+      type: DataTypes.DATEONLY,
+      allowNull: false,
+      defaultValue: DataTypes.NOW,
+    },
+      
   },
   {
     sequelize,
