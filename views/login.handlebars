@@ -1,17 +1,32 @@
-<div class="col-md-12 col-lg-6">
+<div class="container mt-5">
+    <div class="row mx-auto">
+        <div class="col-md-12 col-lg-6">
             <div class="card primary">
                 <h1 class="mx-auto pt-3">Login</h1>
                 <form class="mx-auto login-form">
-                    <label>Email</label>
-                    <input type="text" id="username-login" class="form-control mb-2">
-                    <label>Password</label>
-                    <input type="password" id="password-login" class="form-control mb-2">
-                    <input type="submit" value="Login" class="btn btn-primary mb-3">
+                    <label for="email-login">Email</label>
+                    <input type="text" id="email-login" class="form-control mb-2" name="email" required>
+                    <label for="password-login">Password</label>
+                    <input type="password" id="password-login" class="form-control mb-2" name="password" required>
+                    <input type="submit" value="Login" class="btn btn-primary mb-3" id="loginButton">
                 </form>
             </div>
         </div>
+        <div class="col-md-12 col-lg-6">
+            <div class="card primary">
+                <h1 class="mx-auto pt-3">Sign Up</h1>
+                <form class="mx-auto signup-form">
+                    <label for="name-signup">Name</label>
+                    <input type="text" id="name-signup" class="form-control mb-2" name="name" required>
+                    <label for="email-signup">Email</label>
+                    <input type="text" id="email-signup" class="form-control mb-2" name="email" required>
+                    <label for="password-signup">Password</label>
+                    <input type="password" id="password-signup" class="form-control mb-2" name="password" required>
+                    <input type="submit" value="Sign Up" class="btn btn-primary mb-3" id="signupButton">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
-    <!-- Include the login.js script to enable functionality -->
-    <script src="../public/js/login.js"></script>
-</body>
-</html>
+<script src="/js/login.js"></script>

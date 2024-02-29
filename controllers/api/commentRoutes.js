@@ -1,34 +1,40 @@
-const router = require('express').Router();
-const { Comment } = require('../../models/');
-const withAuth = require('../../utils/auth');
+const router = require("express").Router();
+const { User, Comment, Post } = require("../../models/");
+const withAuth = require("../../utils/auth");
 
-router.get('/', withAuth, async (req, res) => {
- try{ 
-  const commentData = await Comment.findAll({
-    include: [User],
-  });
-// serialize the data
-  const comments = commentData.map((comment) => comment.get({ plain: true }));
+router.get("/", async (req, res) => {
+  try {
+    const commentData = await Comment.findAll({
+      include: [
+        {
+          model: User,
+          attributes: ["name"],
+        },
+      ],
+    });
 
-  console.log(comments);
-  
-  res.render('single-post', {comments, loggedIn: req.session.loggedIn});
-} catch(err) {
+    const comments = commentData.map((comment) => comment.get({ plain: true }));
+
+    res.json(comments);
+  } catch (err) {
+    console.error(err);
     res.status(500).json(err);
-}
+  }
 });
 
-router.post('/', withAuth, async (req, res) => {
-  const body = req.body;
-
+router.post("/:post_id", withAuth, async (req, res) => {
+  console.log(req.body);
   try {
     const newComment = await Comment.create({
-      ...body,
-      userId: req.session.userId,
+      ...req.body,
+      user_id: req.session.user_id,
+      post_id: req.params.post_id,
     });
-    res.json(newComment);
+
+    res.status(200).json(newComment);
   } catch (err) {
-    res.status(500).json(err);
+    console.error(err);
+    res.status(400).json(err);
   }
 });
 

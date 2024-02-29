@@ -1,33 +1,41 @@
-<div class="center">
-  <!-- Simplified Blog Post Creation Section -->
-  <div id="createPost">
-    <!-- Card Header using post-header class for styling -->
-    <div class="post-header">
-      <h4>Create New Post</h4>
-    </div>
-    <!-- Card Body for Form, applying form styling directly -->
-    <div class="card-body">
-      <!-- Blog Creation Form -->
-      <form id="createBlog" class="form">
-        <!-- Input for Post Title -->
-        <div>
-          <label for="title">Title</label>
-          <input type="text" name="title">
-        </div>
-        <!-- Textarea for Post Content -->
-        <div>
-          <label for="content">Content</label>
-          <textarea name="content"></textarea>
-        </div>
-        <!-- Submit Button for Form -->
-        <button type="submit" class="btn-generic">Create</button>
-      </form>
-    </div>
+<div class="row mb-4">
+  <div class="col-md-12">
+    <h2>
+      <a href="/post/{{post.id}}">{{post.title}}</a>
+    </h2>
+    <p>Posted by {{post.user.name}} on {{post.date_created}}</p>
   </div>
-
-  <!-- Button to Trigger New Post Creation -->
-  <button id="GrabPost" type="button" class="btn-add">+ New Post</button>
+  <div class="col-md-12">
+    <p>{{post.content}}</p>
+  </div>
 </div>
 
-<!-- Link to JavaScript file for handling post creation -->
-<script src="./../../public/js/createPost.js"></script>
+<div class="row mb-4">
+  <div class="col-md-12">
+    <h2>Comments</h2>
+  </div>
+  <div class="col-md-12">
+    {{#each post.comments as |comment|}}
+    <div class="card mb-1">
+      <p>{{comment.content}}</p>
+      <p>- {{comment.user.name}} {{comment.date_created}}</p>
+    </div>
+    {{/each}}
+    {{#if logged_in}}
+    <button id="commentButton" class="mb-2">New Comment</button>
+    <div id="createCommentModal" class="modal">
+      <div class="modal-content">
+        <span class="commentModalClose">&times;</span>
+        <form class="post-form">
+          <label>Enter Comment:</label>
+          <p id="currentPost" class="d-none">{{post.id}}</p>
+          <input type="text" id="add-comment" class="form-control mb-2">
+          <input type="submit" value="Create" id="newCommentButton">
+        </form>
+      </div>
+    </div>
+    {{/if}}
+  </div>
+</div>
+
+<script src="/js/profile.js"></script>

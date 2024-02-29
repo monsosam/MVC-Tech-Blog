@@ -1,57 +1,58 @@
-const router = require('express').Router();
-const { Post } = require('../../models/');
-const withAuth = require('../../utils/auth');
+const router = require("express").Router();
+const { Post } = require("../../models/");
+const withAuth = require("../../utils/auth");
 
 // Make post
-router.post('/', withAuth, async (req, res) => {
-  const body = req.body;
-    console.log(body);
+router.post("/", withAuth, async (req, res) => {
   try {
-    const newPost = await Post.create({ ...body, userId: req.session.userId });
-    console.log("Here is the new post: ",  newPost);
-    res.json(newPost);
-     } catch (err) {
-       console.log('IT FAILED!', err);
-    res.status(500).json(err);
+    const newPost = await Post.create({
+      ...req.body,
+      user_id: req.session.user_id,
+    });
+    res.status(200).json(newPost);
+  } catch (err) {
+    res.status(400).json(err);
   }
 });
 
 // Update post
-router.put('/:id', withAuth, async (req, res) => {
+router.put("/:id", async (req, res) => {
   try {
-    console.log('Here is the req.body', req.body);
-    const [affectedRows] = await Post.update(req.body, {
-      where: {
-        id: req.params.id,
+    const updatedPost = await Post.update(
+      {
+        title: req.body.title,
+        content: req.body.content,
       },
-    });
-
-    if (affectedRows > 0) {
-      res.status(200).end();
-    } else {
-      res.status(404).end();
-    }
+      {
+        where: {
+          id: req.params.id,
+        },
+      }
+    );
+    res.json(updatedPost);
   } catch (err) {
-    res.status(500).json(err);
+    res.status(400).json(err);
   }
 });
 
 // Delete post
-router.delete('/:id', withAuth, async (req, res) => {
+router.delete("/:id", withAuth, async (req, res) => {
   try {
-    const [affectedRows] = Post.destroy({
+    const postData = await Post.destroy({
       where: {
         id: req.params.id,
+        user_id: req.session.user_id,
       },
     });
-
-    if (affectedRows > 0) {
-      res.status(200).end();
-    } else {
-      res.status(404).end();
+    if (!postData) {
+      res
+        .status(404)
+        .json({ message: "No post with this ID or Invalid permissions" });
+      return;
     }
+    res.status(200).json(postData);
   } catch (err) {
-    res.status(500).json(err);
+    res.status(400).json(err);
   }
 });
 

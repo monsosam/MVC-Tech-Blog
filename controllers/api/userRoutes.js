@@ -1,65 +1,50 @@
-const router = require('express').Router();
-const { User } = require('../../models');
+const router = require("express").Router();
+const { User } = require("../../models");
 
 // Sign up
-
-router.post('/', async (req, res) => {
+router.post("/", async (req, res) => {
   try {
-    const newUser = await User.create({
-      username: req.body.username,
-      password: req.body.password
-    });
-
+    const userData = await User.create(req.body);
     req.session.save(() => {
-      req.session.userId = newUser.id;
-      req.session.username = newUser.username;
-      req.session.loggedIn = true;
-
-      res.json(newUser);
+      req.session.user_id = userData.id;
+      req.session.logged_in = true;
+      res.status(200).json(userData);
     });
   } catch (err) {
-    res.status(500).json(err);
+    res.status(400).json(err);
   }
 });
 
 // Login
-
-router.post('/login', async (req, res) => {
+router.post("/login", async (req, res) => {
   try {
-    const user = await User.findOne({
-      where: {
-        username: req.body.username,
-      },
-    });
-
-    if (!user) {
-      res.status(400).json({ message: 'No user account found!' });
+    const userData = await User.findOne({ where: { email: req.body.email } });
+    if (!userData) {
+      res
+        .status(400)
+        .json({ message: "Incorrect email or password, please try again" });
       return;
     }
-
-    const validPassword = user.checkPassword(req.body.password);
-
+    const validPassword = await userData.checkPassword(req.body.password);
     if (!validPassword) {
-      res.status(400).json({ message: 'No user account found!' });
+      res
+        .status(400)
+        .json({ message: "Incorrect email or password, please try again" });
       return;
     }
-
     req.session.save(() => {
-      req.session.userId = user.id;
-      req.session.username = user.username;
-      req.session.loggedIn = true;
-
-      res.json({ user, message: 'You are now logged in!' });
+      req.session.user_id = userData.id;
+      req.session.logged_in = true;
+      res.json({ user: userData, message: "You are now logged in!" });
     });
   } catch (err) {
-    res.status(400).json({ message: 'No user account found!' });
+    res.status(400).json(err);
   }
 });
 
 // Logout
-
-router.post('/logout', (req, res) => {
-  if (req.session.loggedIn) {
+router.post("/logout", async (req, res) => {
+  if (req.session.logged_in) {
     req.session.destroy(() => {
       res.status(204).end();
     });

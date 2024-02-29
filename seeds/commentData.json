@@ -1,17 +1,17 @@
 [
-    {
-      "content": "This is a great post!",
-      "user_id": 1,
-      "post_id": 1
-    },
-    {
-      "content": "Nice work!",
-      "user_id": 2,
-      "post_id": 1
-    },
-    {
-      "content": "Looking forward to more content like this.",
-      "user_id": 3,
-      "post_id": 2
-    }
-  ]
+  {
+    "content": "This is a great post!",
+    "user_id": 1,
+    "post_id": 1
+  },
+  {
+    "content": "Nice work!",
+    "user_id": 2,
+    "post_id": 1
+  },
+  {
+    "content": "Looking forward to more content like this.",
+    "user_id": 3,
+    "post_id": 2
+  }
+]
