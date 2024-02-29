@@ -20,30 +20,34 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 
 // Express session setup
-app.use(session({
-  secret: 'super secret string',
-  cookie: { 
-    maxAge: 1800000,  // Session expires after 30 minutes of inactivity
-    httpOnly: true,
-    secure: false,
-    sameSite: 'strict',
-   }, 
+const sess = {
+  secret: 'Super secret secret',
+  cookie: {
+      maxAge: 3600000,
+      httpOnly: true,
+      secure: false,
+      sameSite: 'strict',
+  },
   resave: false,
   saveUninitialized: true,
   store: new SequelizeStore({
-    db: sequelize
-  }),
-}));
+      db: sequelize
+  })
+};
 
-// Handlebars setup
+app.use(session(sess));
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
-app.set('views', './views');
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, 'public')));
+app.set('views', path.join(__dirname, 'views'));
+app.use(routes);
 
 // Routes
 app.use(routes);
 
 // Start the server
 sequelize.sync({ force: false }).then(() => {
-  app.listen(PORT, () => console.log(`Now listening on PORT ${PORT}`));
+  app.listen(PORT, () => console.log(`Server is now listening on PORT ${PORT}`));
 });
