@@ -15,7 +15,7 @@ This is a Tech Blog site.
 1. Clone this repository.
 2. Install dependencies (`npm install`).
 3. Set up your MySQL database.
-4. Run migrations (`npm run seed`).
+4. Seed Database (`npm run seed`).
 5. Start the server (`npm start`).
 6. Visit `http://localhost:3001` in your browser.
 
