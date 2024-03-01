@@ -10,46 +10,58 @@ router.use((err, req, res, next) => {
 });
 
 router.get("/", asyncHandler(async (req, res) => {
-  const blogs = await Blog.findAll({
+  let blogs = await Blog.findAll({
     include: User,
-  }).map((blog) => blog.get({ plain: true }));
+  });
+  // Convert Sequelize objects to plain objects after awaiting the Promise
+  blogs = blogs.map((blog) => blog.get({ plain: true }));
 
   res.render("homepage", { blogs, logged_in: req.session.logged_in });
 }));
 
 router.get("/dashboard", withAuth, asyncHandler(async (req, res) => {
-  const blogs = await Blog.findAll({
+  let blogs = await Blog.findAll({
     where: { user_id: req.session.user_id },
     include: User,
-  }).map((blog) => blog.get({ plain: true }));
+  });
+  // Convert Sequelize objects to plain objects
+  blogs = blogs.map((blog) => blog.get({ plain: true }));
 
   res.render("dashboard", { blogs, url: req.originalUrl, logged_in: req.session.logged_in });
 }));
 
 router.get("/createblog", withAuth, asyncHandler(async (req, res) => {
-  const user = await User.findOne({ where: { id: req.session.user_id } }).get({ plain: true });
+  let user = await User.findOne({ where: { id: req.session.user_id } });
+  // Convert Sequelize object to a plain object
+  user = user.get({ plain: true });
+
   res.render("createblog", { user, url: req.originalUrl, logged_in: req.session.logged_in });
 }));
 
 router.get("/editblog/:id", withAuth, asyncHandler(async (req, res) => {
-  const blog = await Blog.findOne({
+  let blog = await Blog.findOne({
     where: { id: req.params.id },
     include: [User, Comment],
-  }).get({ plain: true });
+  });
+  // Convert Sequelize object to a plain object
+  blog = blog.get({ plain: true });
 
   res.render("editblog", { blog, url: req.originalUrl, logged_in: req.session.logged_in });
 }));
 
 router.get("/blog/:id", asyncHandler(async (req, res) => {
-  const blog = await Blog.findOne({
+  let blog = await Blog.findOne({
     where: { id: req.params.id },
     include: [User, Comment],
-  }).get({ plain: true });
+  });
+  blog = blog.get({ plain: true });
 
-  const comments = await Comment.findAll({
+  let comments = await Comment.findAll({
     where: { blog_id: req.params.id },
     include: [User, Blog],
-  }).map((comment) => comment.get({ plain: true }));
+  });
+  // Convert Sequelize objects to plain objects
+  comments = comments.map((comment) => comment.get({ plain: true }));
 
   res.render("blog", { blog, comments, logged_in: req.session.logged_in });
 }));
