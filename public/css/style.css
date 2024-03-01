@@ -1,10 +1,10 @@
 :root {
     /* Colors */
-    --primary-color: #191814;
-    --secondary-color: #1C3F2C;
-    --tertiary-color: #5F7F6A;
-    --quaternary-color: #8EA895;
-    --quinary-color: #E5F3D6;
+    --primary-color: #d7263dff;
+    --secondary-color: #f46036ff;
+    --tertiary-color: #2e294eff;
+    --quaternary-color: #1b998bff;
+    --quinary-color: #c5d86dff;
     /* Font Sizes */
     --font-size-lg: 48px;
     --font-size-md: 24px;
