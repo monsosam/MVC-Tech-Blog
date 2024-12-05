@@ -1,0 +1,60 @@
+<!-- Single Blog Post Container -->
+<div class="card">
+
+  <!-- Blog Post Content -->
+  <div class="post-header">
+    <h2>{{blog.title}}</h2>
+    <p class="posted-by">Posted by {{blog.user.name}} on {{format_datetime blog.date_created}}</p>
+  </div>
+  
+  <div class="post-content">
+    <p>{{blog.content}}</p>
+  </div>
+
+  <!-- Comments Section -->
+  {{#if logged_in}}
+    <!-- Comment Form -->
+    <div class="comment-area">
+      <form id="comment" data-blogid="{{blog.id}}">
+        <div class="form-group">
+          <label for="content">Add a Comment:</label>
+          <textarea 
+            name="content" 
+            class="form-input" 
+            placeholder="Share your thoughts..."
+          ></textarea>
+        </div>
+        <button type="submit" class="btn-generic">Submit Comment</button>
+      </form>
+    </div>
+  {{else}}
+    <p class="login-prompt">Please <a href="/login" class="login-link">login</a> to leave a comment.</p>
+  {{/if}}
+
+  <!-- Existing Comments -->
+  {{#if blog.comments.length}}
+    <div class="comments-section">
+      <h3>Comments ({{blog.comments.length}})</h3>
+      
+      {{#each blog.comments}}
+        <div class="comment">
+          <div class="comment-header">
+            <p class="posted-by">
+              {{user.name}} - {{format_datetime date_created}}
+            </p>
+          </div>
+          <div class="comment-content">
+            <p>{{content}}</p>
+          </div>
+        </div>
+      {{/each}}
+    </div>
+  {{else}}
+    <p class="no-comments">No comments yet. Be the first to share your thoughts!</p>
+  {{/if}}
+</div>
+
+<!-- Load comment handling script if user is logged in -->
+{{#if logged_in}}
+  <script defer src="/js/comment.js"></script>
+{{/if}}

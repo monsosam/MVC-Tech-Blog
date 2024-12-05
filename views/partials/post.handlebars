@@ -1,0 +1,31 @@
+<!-- Individual Blog Post Card -->
+<article class="card">
+  <div class="post-header">
+    
+    <!-- Title with conditional link -->
+    {{#if dashboard}}
+      <a href="/dashboard/edit/{{id}}" class="post-link">
+        <h2>{{title}}</h2>
+      </a>
+    {{else}}
+      <a href="/blog/{{id}}" class="post-link">
+        <h2>{{title}}</h2>
+      </a>
+    {{/if}}
+    
+    <!-- Post metadata -->
+    <p class="posted-by">
+      Posted by {{user.name}} on {{format_date date_created}}
+    </p>
+  </div>
+
+  <!-- Post content -->
+  <div class="post-content">
+    <p>{{truncate content}}</p>
+
+    <!-- Comment count if any -->
+    {{#if comments.length}}
+      <p>{{comments.length}} {{pluralize "comment" comments.length}}</p>
+    {{/if}}
+  </div>
+</article>

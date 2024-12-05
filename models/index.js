@@ -1,5 +1,7 @@
+// models/index.js
+
 const User = require('./User')
-const Blog = require('./Blog')
+const Blog = require('./Blog')  
 const Comment = require('./Comment')
 
 User.hasMany(Blog, {
@@ -29,4 +31,4 @@ Comment.belongsTo(User, {
   foreignKey: 'user_id'
 })
 
-module.exports = {User, Blog, Comment}
+module.exports = { User, Blog, Comment }

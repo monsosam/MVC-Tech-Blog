@@ -1,0 +1,28 @@
+<!-- Individual Comment Component -->
+<div class="comment">
+    
+  <!-- Comment Header with Author and Date -->
+  <div class="comment-header">
+    <p class="posted-by">
+      {{user.name}} - {{format_datetime date_created}}
+    </p>
+  </div>
+
+  <!-- Comment Content -->
+  <div class="comment-content">
+    <p>{{content}}</p>
+  </div>
+
+  <!-- Delete Comment Option (only shown to comment author) -->
+  {{#if (eq user_id ../user_id)}}
+    <div class="comment-actions">
+      <button 
+        class="btn-generic"
+        data-comment-id="{{id}}"
+        onclick="deleteComment({{id}})"
+      >
+        Delete
+      </button>
+    </div>
+  {{/if}}
+</div>

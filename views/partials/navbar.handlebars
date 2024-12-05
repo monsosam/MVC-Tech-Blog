@@ -1,0 +1,37 @@
+<!-- Navigation Bar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        
+        <!-- Mobile menu toggle button -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Navigation links -->
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <!-- Home link -->
+                <li class="nav-item">
+                    <a class="navbar-brand {{#if (eq url '/')}}active{{/if}}" href="/">Home</a>
+                </li>
+
+                <!-- Dashboard link - only shown when logged in -->
+                {{#if logged_in}}
+                <li class="nav-item">
+                    <a class="btn-nav {{#if (eq url '/dashboard')}}active{{/if}}" href="/dashboard">Dashboard</a>
+                </li>
+                {{/if}}
+
+                <!-- Login/Logout -->
+                <li class="nav-item">
+                    {{#if logged_in}}
+                    <a class="btn-nav" href="/logout" id="logout">Log out</a>
+                    {{else}}
+                    <a class="btn-nav {{#if (eq url '/login')}}active{{/if}}" href="/login">Log in</a>
+                    {{/if}}
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

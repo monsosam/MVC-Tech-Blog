@@ -1,49 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <!-- Meta tags for responsiveness and character encoding -->
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Tech Blog - Share and discuss the latest in technology">
+    <meta name="keywords" content="tech, blog, technology, coding, web development">
+    
     <title>Tech Blog</title>
-
-    <!-- Bootstrap CSS for styling -->
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+    
+    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 
-<body class="bg-info">
+<body>
     <!-- Navigation Bar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
-            <!-- Navbar toggler for mobile view -->
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
-            <!-- Navbar items -->
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
-                    <!-- Home link -->
                     <li class="nav-item">
-                        <a class="navbar-brand" aria-current="page" href="/">Home </a>
+                        <a class="navbar-brand" href="/">Home</a>
                     </li>
 
-                    <!-- Dashboard link, visible only if logged in -->
                     {{#if logged_in}}
                     <li class="nav-item">
-                        <a class="nav-link mx-2" aria-current="page" href="/dashboard">Dashboard</a>
+                        <a class="btn-nav" href="/dashboard">Dashboard</a>
                     </li>
                     {{/if}}
 
-                    <!-- Conditional Login/Logout link based on login status -->
                     <li class="nav-item">
                         {{#if logged_in}}
-                        <a class="nav-link mx-2" href="/logout" id="logout">Log out</a>
+                        <a class="btn-nav" href="/logout" id="logout">Log out</a>
                         {{else}}
-                        <a class="nav-link mx-2" href="/login">Log in</a>
+                        <a class="btn-nav" href="/login">Log in</a>
                         {{/if}}
                     </li>
                 </ul>
@@ -51,21 +53,29 @@
         </div>
     </nav>
 
-    <!-- Header Text Box -->
-    <div
-        style="background-color: #dc3545; padding: 5px 10px; margin: 20px; border-radius: 10px; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5); display: inline-block;">
-        <h1 style="margin: 0; color: white;">Tech Blog</h1>
-    </div>
+    <!-- Header -->
+    <header>
+        <h1>Tech Blog</h1>
+    </header>
 
-    <!-- Main content area -->
+    <!-- Main content -->
     <main class="container container-fluid mt-5">
         {{{ body }}}
     </main>
 
-    <!-- Logout script, included only if logged in -->
+    <!-- Footer -->
+    <footer class="footer mt-auto py-3 bg-dark">
+        <div class="container text-center">
+            <span class="text-light">© 2024 Tech Blog. All rights reserved.</span>
+        </div>
+    </footer>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+        crossorigin="anonymous"></script>
+
     {{#if logged_in}}
-    <script src="/js/logout.js"></script>
+    <script defer src="/js/logout.js"></script>
     {{/if}}
 </body>
-
-</html>

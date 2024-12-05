@@ -1,25 +1,52 @@
-<!-- Custom style for the blog post titles -->
-<style>
-  .card h4 {
-    color: aliceblue;
-  }
-</style>
+<!-- Blog post feed container -->
+<div class="center">
+  {{#if blogs.length}}
+  
+    <!-- Welcome message for logged in users -->
+    {{#if logged_in}}
+      <h2>Welcome back, {{userName}}!</h2>
+    {{/if}}
 
-<!-- Loop through each blog post in the 'blogs' array -->
-{{#each blogs}}
-<div class="card my-3">
-  <!-- Clickable area linking to the blog post's detailed view -->
-  <a href="/blog/{{id}}" class="text-decoration-none text-reset">
-    <!-- Card header containing the blog title and author information -->
-    <div class="card-header navbar-dark bg-dark d-flex justify-content-between align-items-center">
-      <h4>{{title}}</h4> <!-- Blog title -->
-      <h4 class="mt-3 ms-3">Posted by {{user.name}} on {{format_date date_created}}</h4> <!-- Author and date -->
+    <!-- Blog post feed -->
+    <div class="blog-feed">
+      {{#each blogs}}
+      <article class="blog-preview">
+
+        <!-- Title and metadata section -->
+        <div class="blog-preview-header">
+          <h3 class="blog-title">{{title}}</h3>
+          <div class="blog-meta">
+            <span class="author">By {{user.name}}</span>
+            <span class="date">{{format_datetime date_created}}</span>
+          </div>
+        </div>
+
+        <!-- Preview content -->
+        <div class="blog-preview-content">
+          <p>{{truncate content 200}}</p>
+          
+          <!-- Engagement metrics -->
+          <div class="blog-engagement">
+            {{#if comments.length}}
+              <span>💬 {{comments.length}} {{pluralize "comment" comments.length}}</span>
+            {{/if}}
+            <a href="/blog/{{id}}" class="read-more">Read full post →</a>
+          </div>
+        </div>
+      </article>
+      {{/each}}
     </div>
-    <!-- Card body containing a snippet or summary of the blog content -->
-    <div
-      class="card-body bg-danger bg-opacity-50 text-dark w-100 m-auto p-auto border border-dark border-top-0 border-4 rounded-bottom">
-      <h5>{{content}}</h5> <!-- Blog content -->
+  {{else}}
+
+    <!-- Empty state -->
+    <div class="empty-state">
+      <h2>Welcome to Tech Blog!</h2>
+      <p>Be the first to share your thoughts and ideas.</p>
+      {{#if logged_in}}
+        <a href="/dashboard/new" class="btn-add">Create First Post</a>
+      {{else}}
+        <a href="/login" class="btn-generic">Login to Start Posting</a>
+      {{/if}}
     </div>
-  </a>
+  {{/if}}
 </div>
-{{/each}}

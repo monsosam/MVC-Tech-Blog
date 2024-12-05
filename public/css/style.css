@@ -200,10 +200,142 @@ button {
     font-weight: bold;
 }
 
+.btn-generic,
+.btn-nav,
+.btn-add {
+  transition: all 0.2s ease-in-out;
+}
+
 /* =================================== */
 /* UTILITY */
 .center {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+/* Improve accessibility with focus states */
+input:focus,
+textarea:focus {
+  outline: 2px solid var(--quaternary-color);
+  outline-offset: 2px;
+}
+
+.btn-generic:focus,
+.btn-nav:focus,
+.btn-add:focus {
+  outline: 2px solid var(--quaternary-color);
+  outline-offset: 2px;
+}
+
+/* New shared components */
+
+/* Notifications */
+.notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 15px 20px;
+    border-radius: 5px;
+    color: var(--quinary-color);
+    z-index: 1000;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.notification-success {
+    background-color: var(--quaternary-color);
+}
+
+.notification-error {
+    background-color: var(--primary-color);
+}
+
+/* Form elements */
+.form-error {
+    color: var(--primary-color);
+    margin-top: 10px;
+    font-size: var(--font-size-sm);
+    font-weight: bold;
+}
+
+.form-helper {
+    font-size: var(--font-size-sm);
+    margin-top: 5px;
+    color: var(--tertiary-color);
+}
+
+/* Loading states */
+.btn-loading {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+/* Comment specific styles */
+.comment-area {
+    position: relative;
+}
+
+.character-counter {
+    text-align: right;
+    font-size: var(--font-size-sm);
+    color: var(--tertiary-color);
+    margin-top: 5px;
+}
+
+.character-counter.near-limit {
+    color: var(--primary-color);
+}
+
+/* Password strength indicator */
+.password-strength {
+    margin-top: 5px;
+    font-size: var(--font-size-sm);
+}
+
+.password-strength-weak {
+    color: var(--primary-color);
+}
+
+.password-strength-moderate {
+    color: var(--secondary-color);
+}
+
+.password-strength-strong {
+    color: var(--quaternary-color);
+}
+
+/* Add responsive breakpoints for different screen sizes */
+@media (max-width: 768px) {
+    main {
+      margin: 25px 20px;  /* Smaller margins on mobile */
+    }
+    
+    h1 {
+      font-size: calc(var(--font-size-lg) * 0.75);  /* Smaller headers on mobile */
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+      --primary-color: #ff4d4d;
+      --quinary-color: #e6e6e6;
+      /* Adjust other colors for dark mode */
+    }
+    
+    body {
+      background-color: #1a1a1a;
+    }
+}
+
+@media print {
+    .btn-nav,
+    .btn-add,
+    .btn-generic {
+      display: none;
+    }
+    
+    body {
+      background: none;
+      color: black;
+    }
 }

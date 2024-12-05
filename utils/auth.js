@@ -1,12 +1,28 @@
-const withAuth = (req, res, next) => {
-    // If the user is not logged in, redirect the user to the login page
-    if (!req.session.loggedIn) {
-      res.redirect('/login');
-    } else {
-      // If the user is logged in, execute the route function that will allow them to view the page
-      // We call next() if the user is authenticated
-      next();
-    }
+// utils/auth.js
+
+// Helper function to check if a password meets requirements
+const validatePassword = (password) => {
+  const minLength = 8;
+  return password.length >= minLength;
+};
+
+// Helper function to sanitize user input
+const sanitizeUser = (userData) => {
+  return {
+    ...userData,
+    email: userData.email.toLowerCase().trim(),
+    name: userData.name.trim()
   };
-  
-  module.exports = withAuth;
+};
+
+// Helper function to check for valid email format
+const validateEmail = (email) => {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
+};
+
+module.exports = {
+  validatePassword,
+  sanitizeUser,
+  validateEmail
+};

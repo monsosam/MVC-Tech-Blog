@@ -1,31 +1,39 @@
-<!-- Styling for blog titles -->
-<style>
-  .card h4 {
-    color: aliceblue;
-  }
-</style>
+<!-- Main container with centered content -->
+<div class="center">
 
-<!-- Loop through each blog in the 'blogs' array -->
-{{#each blogs}}
-<div class="card my-2">
-  <!-- Link to edit the specific blog post -->
-  <a href="/editblog/{{id}}" class="col-sm-12 my-auto text-decoration-none text-reset">
-    <!-- Card Header with Blog Title -->
-    <div class="card-header navbar-dark bg-dark d-flex justify-content-between align-items-center">
-      <h4>{{title}}</h4>
+  <!-- Check if there are any blogs to display -->
+  {{#if blogs.length}}
+
+    <!-- Loop through each blog post -->
+    {{#each blogs}}
+    <div class="card my-2">
+      <a href="/dashboard/edit/{{id}}" class="post-link">
+        <div class="post-header">
+          <h2>{{title}}</h2>
+          <p class="posted-by">Posted by {{user.name}} on {{format_date date_created}}</p>
+        </div>
+        <div class="post-content">
+          <p>{{truncate content}}</p>
+          {{#if comments.length}}
+            <p>{{comments.length}} {{pluralize "comment" comments.length}}</p>
+          {{/if}}
+        </div>
+      </a>
     </div>
-    <!-- Card Body with Blog Content -->
-    <div
-      class="card-body bg-danger bg-opacity-50 text-dark w-100 m-auto p-auto border border-dark border-top-0 border-4 rounded-bottom">
-      <h5>{{content}}</h5>
-    </div>
-  </a>
+    {{/each}}
+  {{else}}
+    <h2>No blog posts yet</h2>
+  {{/if}}
+
+  <!-- Button container -->
+  <div class="center">
+    <button id="grabPost" type="button" class="btn-add">
+      Create New Post
+    </button>
+  </div>
 </div>
-{{/each}}
 
-<!-- Button to Add a New Post -->
-<button id="grabPost" type="button"
-  class="fs-4 py-2 px-3 text-light bg-primary rounded fixed-bottom w-25 mx-auto mb-2">Add New Post</button>
-
-<!-- Link to JavaScript file for handling blog post interactions -->
-<script src="/js/grabBlog.js"></script>
+<!-- Load dashboard JavaScript only if user is logged in -->
+{{#if logged_in}}
+<script defer src="/js/dashboard.js"></script>
+{{/if}}
